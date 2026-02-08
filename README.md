@@ -72,22 +72,34 @@ curl http://localhost:8080/api/v1/jobs/stats
 
 ```
 job-aggregator/
+├── .github/
+│   └── workflows/     # CI/CD pipelines
 ├── cmd/
-│   ├── api/           # API server
-│   └── scraper/       # CLI scraper tool
+│   ├── api/           # API server (main.go)
+│   └── scraper/       # CLI scraper tool (main.go)
+├── docs/              # Documentation
+│   ├── API_EXAMPLES.md
+│   ├── ARCHITECTURE.md
+│   └── QUICKSTART.md
 ├── internal/
 │   ├── api/           # HTTP handlers
-│   ├── service/       # Business logic
-│   ├── repository/    # Database layer
-│   ├── scraper/       # Scraping engine
+│   ├── config/        # Configuration management
 │   ├── models/        # Data models
-│   └── config/        # Configuration
+│   ├── repository/    # Database layer
+│   ├── scraper/       # Scraping engine & tests
+│   └── service/       # Business logic
 ├── pkg/
 │   ├── logger/        # Logging utility
-│   └── ratelimit/     # Rate limiter
+│   └── ratelimit/     # Rate limiter & tests
+├── .env               # Environment variables
+├── .gitignore
+├── CONTRIBUTING.md
 ├── docker-compose.yml
 ├── Dockerfile
-└── go.mod
+├── go.mod
+├── LICENSE
+├── Makefile
+└── README.md
 ```
 
 ## 🔑 Key Concepts Demonstrated
