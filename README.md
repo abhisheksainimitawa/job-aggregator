@@ -16,7 +16,6 @@ A high-performance job aggregation platform built with Go that scrapes multiple 
 - **Go 1.21+** - Core language
 - **Gorilla Mux** - HTTP routing
 - **PostgreSQL** - Database with connection pooling
-- **Redis** - Caching layer
 - **Docker** - Containerization
 
 ## 🚀 Quick Start
@@ -35,8 +34,8 @@ cd job-aggregator
 # Install dependencies
 go mod download
 
-# Start database and Redis
-docker-compose up -d postgres redis
+# Start database
+docker-compose up -d postgres
 
 # Run the API server
 go run cmd/api/main.go

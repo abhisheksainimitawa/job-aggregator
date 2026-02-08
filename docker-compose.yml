@@ -19,20 +19,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Redis Cache
-  redis:
-    image: redis:7-alpine
-    container_name: job_aggregator_redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   # API Server
   api:
     build:
@@ -48,18 +34,13 @@ services:
       - DB_PASSWORD=postgres
       - DB_NAME=job_aggregator
       - DB_SSLMODE=disable
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
       - SERVER_PORT=8080
       - SCRAPER_WORKERS=10
       - SCRAPER_RATE_LIMIT=100
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     restart: unless-stopped
 
 volumes:
   postgres_data:
-  redis_data:

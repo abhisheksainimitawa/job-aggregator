@@ -29,7 +29,7 @@ cd job-aggregator
 go mod download
 
 # Start dependencies
-docker-compose up -d postgres redis
+docker-compose up -d postgres
 
 # Run tests
 go test ./...

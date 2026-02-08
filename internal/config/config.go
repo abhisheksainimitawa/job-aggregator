@@ -10,7 +10,6 @@ import (
 // Config holds all application configuration
 type Config struct {
 	Database DatabaseConfig
-	Redis    RedisConfig
 	Server   ServerConfig
 	Scraper  ScraperConfig
 }
@@ -23,14 +22,6 @@ type DatabaseConfig struct {
 	Password string
 	DBName   string
 	SSLMode  string
-}
-
-// RedisConfig holds Redis configuration
-type RedisConfig struct {
-	Host     string
-	Port     int
-	Password string
-	DB       int
 }
 
 // ServerConfig holds server configuration
@@ -57,12 +48,6 @@ func Load() (*Config, error) {
 			DBName:   getEnv("DB_NAME", "job_aggregator"),
 			SSLMode:  getEnv("DB_SSLMODE", "disable"),
 		},
-		Redis: RedisConfig{
-			Host:     getEnv("REDIS_HOST", "localhost"),
-			Port:     getEnvAsInt("REDIS_PORT", 6379),
-			Password: getEnv("REDIS_PASSWORD", ""),
-			DB:       getEnvAsInt("REDIS_DB", 0),
-		},
 		Server: ServerConfig{
 			Host: getEnv("SERVER_HOST", "0.0.0.0"),
 			Port: getEnvAsInt("SERVER_PORT", 8080),
@@ -87,11 +72,6 @@ func (c *Config) GetDatabaseDSN() string {
 		c.Database.DBName,
 		c.Database.SSLMode,
 	)
-}
-
-// GetRedisAddr returns the Redis address
-func (c *Config) GetRedisAddr() string {
-	return fmt.Sprintf("%s:%d", c.Redis.Host, c.Redis.Port)
 }
 
 // GetServerAddr returns the server address
